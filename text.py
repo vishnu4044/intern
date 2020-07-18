@@ -1,7 +1,6 @@
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.taptargetview import MDTapTargetView
 from googletrans import Translator
 import speech_recognition as sr
 from kivy.core.window import Window
@@ -140,10 +139,6 @@ ScreenManager:
     Camera:
         id: camera
         resolution: (640, 480)
-    MDRectangleFlatButton:
-        text: 'Back'
-        pos_hint: {'center_x':0.5,'center_y':0.1}
-        on_press: root.manager.current = 'menu'
     MDFloatingActionButton:
         icon:"camera-iris"
         pos_hint: {'x': .45, 'y':0.2}
@@ -175,7 +170,7 @@ class MenuScreen(Screen):
     def navigation_draw(self):
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            assistant_speaks("speak sir")
+            assistant_speaks("start speaking sir")
             print("Speak1...")
             audio = r.listen(source,phrase_time_limit=10)
         try:
@@ -274,7 +269,7 @@ sm.add_widget(UploadScreen(name='upload'))
 
 class DemoApp(MDApp):
     def build(self):
-        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.primary_palette = "Yellow"
         screen = Builder.load_string(screen_helper)
         return screen
 
